@@ -6,6 +6,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.internal.http.HttpMethod;
 import okio.Buffer;
+import org.clobotics.utils.CollectionUtil;
+import org.clobotics.utils.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 import javax.crypto.Mac;
@@ -73,7 +75,7 @@ public class AuthInterceptor implements Interceptor {
     }
 
     private boolean isExcludeContentUrl(Request req) {
-        if (excludeContentUrls == null || excludeContentUrls.isEmpty()) {
+        if (CollectionUtil.isEmpty(excludeContentUrls)) {
             return false;
         }
         return excludeContentUrls.contains(req.url().toString());
@@ -90,7 +92,7 @@ public class AuthInterceptor implements Interceptor {
     }
 
     private static String canonicalizedResource(URL url) throws UnsupportedEncodingException {
-        if (url.getQuery() != null) {
+        if (StringUtil.isNotEmpty(url.getQuery())) {
             String params = url.getQuery();
             Map<String, String> paramsMap = Arrays.stream(params.split("&"))
                     .collect(Collectors.toMap(item -> item.split("=")[0], item -> item.split("=")[1]));
