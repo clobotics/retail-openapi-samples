@@ -1,4 +1,4 @@
-package org.clobotics;
+package com.clobotics;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -6,8 +6,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.internal.http.HttpMethod;
 import okio.Buffer;
-import org.clobotics.utils.CollectionUtil;
-import org.clobotics.utils.StringUtil;
+import com.clobotics.utils.CollectionUtil;
+import com.clobotics.utils.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 import javax.crypto.Mac;

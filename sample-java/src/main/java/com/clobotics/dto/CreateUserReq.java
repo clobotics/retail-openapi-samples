@@ -1,4 +1,4 @@
-package org.clobotics.dto;
+package com.clobotics.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

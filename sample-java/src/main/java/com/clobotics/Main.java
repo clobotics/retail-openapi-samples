@@ -1,9 +1,9 @@
-package org.clobotics;
+package com.clobotics;
 
-import org.clobotics.dto.BaseResp;
-import org.clobotics.dto.CreateUserReq;
-import org.clobotics.dto.CreateUserResp;
-import org.clobotics.dto.GetUserResp;
+import com.clobotics.dto.BaseResp;
+import com.clobotics.dto.CreateUserReq;
+import com.clobotics.dto.CreateUserResp;
+import com.clobotics.dto.GetUserResp;
 
 import java.io.IOException;
 

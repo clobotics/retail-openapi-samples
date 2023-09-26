@@ -1,8 +1,8 @@
-package org.clobotics.dto;
+package com.clobotics.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetUserResp {
+public class CreateUserResp {
     private Long id;
     private String username;
     @JsonProperty("real_name")

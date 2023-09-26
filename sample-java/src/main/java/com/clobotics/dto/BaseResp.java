@@ -1,4 +1,4 @@
-package org.clobotics.dto;
+package com.clobotics.dto;
 
 public class BaseResp<T> {
 

@@ -1,10 +1,10 @@
-package org.clobotics;
+package com.clobotics;
 
+import com.clobotics.dto.CreateUserResp;
+import com.clobotics.dto.GetUserResp;
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.clobotics.dto.BaseResp;
-import org.clobotics.dto.CreateUserReq;
-import org.clobotics.dto.CreateUserResp;
-import org.clobotics.dto.GetUserResp;
+import com.clobotics.dto.BaseResp;
+import com.clobotics.dto.CreateUserReq;
 
 import java.io.IOException;
 import java.util.ArrayList;
