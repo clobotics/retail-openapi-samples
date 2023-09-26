@@ -1,7 +1,6 @@
 from client import send_request
 
 if __name__ == "__main__":
-    # 写一个http请求示例
     url = "/user?name=http%3A%2F%2Fwww.baidu.com&username=user123"
     response = send_request("GET", url)
     if response.status_code == 200:
