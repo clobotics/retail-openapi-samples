@@ -78,7 +78,7 @@ public class AuthInterceptor implements Interceptor {
         if (CollectionUtil.isEmpty(excludeContentUrls)) {
             return false;
         }
-        return excludeContentUrls.contains(req.url().toString());
+        return excludeContentUrls.contains(req.url().url().getPath());
     }
 
     private boolean needContentMd5(String method) {

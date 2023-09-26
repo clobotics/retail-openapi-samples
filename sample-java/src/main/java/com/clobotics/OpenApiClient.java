@@ -1,14 +1,13 @@
 package com.clobotics;
 
-import com.clobotics.dto.CreateUserResp;
-import com.clobotics.dto.GetUserResp;
+import com.clobotics.dto.*;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.clobotics.dto.BaseResp;
-import com.clobotics.dto.CreateUserReq;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class OpenApiClient {
 
@@ -25,9 +24,9 @@ public class OpenApiClient {
     }
 
     public OpenApiClient(String host, String appId, String appSecret) {
-        this.okHttpUtils = new OkHttpUtils(appId, appSecret, excludeContentUrls);
         excludeContentUrls = new ArrayList<>();
         excludeContentUrls.add(UPLOAD_IMAGE_URL);
+        this.okHttpUtils = new OkHttpUtils(appId, appSecret, excludeContentUrls);
         this.host = host;
     }
 
@@ -43,4 +42,9 @@ public class OpenApiClient {
         return JsonUtil.toObj(resultStr, new TypeReference<BaseResp<GetUserResp>>() {});
     }
 
+    public BaseResp<UploadResp> uploadFile(File file, Map<String, String> datas) throws IOException {
+        String url = "/op/upload";
+        String resultStr = okHttpUtils.formData(host + url, datas, file);
+        return JsonUtil.toObj(resultStr, new TypeReference<BaseResp<UploadResp>>() {});
+    }
 }

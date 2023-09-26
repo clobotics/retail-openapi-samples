@@ -1,8 +1,11 @@
 package com.clobotics;
 
+import com.clobotics.utils.CollectionUtil;
 import okhttp3.*;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,9 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class OkHttpUtils {
 
-    private Map<String, String> headerMap;
     private final OkHttpClient okHttpClient;
-
 
     public OkHttpUtils(String appId, String appSecret, List<String> excludeContentUrls) {
         AuthInterceptor interceptor = new AuthInterceptor(appId, appSecret);
@@ -28,38 +29,33 @@ public class OkHttpUtils {
                 .build();
     }
 
-
-
-
-    public OkHttpUtils addHeader(String key, String value) {
-        if (headerMap == null) {
-            headerMap = new LinkedHashMap<>(16);
-        }
-        headerMap.put(key, value);
-        return this;
-    }
-
     public String postJson(String url, Object body) throws IOException {
         String jsonBody = JsonUtil.toString(body);
         RequestBody requestBody = RequestBody.create(jsonBody, MediaType.parse("application/json; charset=utf-8"));
         Request.Builder request = new Request.Builder().post(requestBody).url(url);
-       if (headerMap != null) {
-            for (Map.Entry<String, String> entry : headerMap.entrySet()) {
-                request.addHeader(entry.getKey(), entry.getValue());
-            }
-        }
         Response response = okHttpClient.newCall(request.build()).execute();
         return Objects.requireNonNull(response.body()).string();
     }
 
     public String get(String url) throws IOException {
         Request.Builder request = new Request.Builder().get().url(url);
-        if (headerMap != null) {
-            for (Map.Entry<String, String> entry : headerMap.entrySet()) {
-                request.addHeader(entry.getKey(), entry.getValue());
-            }
-        }
         Response response = okHttpClient.newCall(request.build()).execute();
         return Objects.requireNonNull(response.body()).string();
     }
+
+    public String formData(String url, Map<String, String> datas, File file) throws IOException {
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        if (CollectionUtil.isNotEmpty(datas)) {
+            for (Map.Entry<String, String> entry : datas.entrySet()) {
+                builder.addFormDataPart(entry.getKey(), entry.getValue());
+            }
+        }
+        RequestBody body = builder.setType(MultipartBody.FORM)
+                .addFormDataPart("file", file.getName(), RequestBody.create(file, MediaType.parse("image/png")))
+                .build();
+        Request.Builder request = new Request.Builder().post(body).url(url);
+        Response response = okHttpClient.newCall(request.build()).execute();
+        return Objects.requireNonNull(response.body()).string();
+    }
+
 }

@@ -7,6 +7,6 @@ In order to help customers connect to OpenAPI faster, this project will provide 
 
 ## Samples
 The languages we currently support include Java, Python, Go. 
-### Java
-### Python
+### [Java](sample-java)
+### [Python](sample-python)
 ### GO
