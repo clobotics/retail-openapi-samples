@@ -11,8 +11,8 @@ import (
 )
 
 const (
-	AppID     = "AppID"
-	AppSecret = "AppSecret"
+	AppID     = "5d61a8bd-c308-4694-aca0-7ba34243bdd8"
+	AppSecret = "MS5DbG9ib3RpY3Mu5omp5Y2aLjhDNjk3NTM2LTYzNUItNDgxNC04MjYwLUJBRjIyNEJENDRGMQ=="
 	Host      = "https://openapi.clobotics.com"
 )
 
@@ -30,7 +30,7 @@ func TestGetSceneList(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	data, err := util.DoRequest(req)
+	data, err := util.DoRequest(req, 10)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -50,7 +50,7 @@ func TestCreateIrRecognize(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	data, err := util.DoRequest(req)
+	data, err := util.DoRequest(req, 10)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -58,7 +58,7 @@ func TestCreateIrRecognize(t *testing.T) {
 }
 
 func TestUploadFile(t *testing.T) {
-	filePath := "/Users/ycw/Desktop/img3.png"
+	filePath := "../shelf.png"
 	file, err := os.Open(filePath)
 	if err != nil {
 		t.Fatal(err)
@@ -66,7 +66,7 @@ func TestUploadFile(t *testing.T) {
 	defer file.Close()
 	var requestBody bytes.Buffer
 	writer := multipart.NewWriter(&requestBody)
-	fileField, err := writer.CreateFormFile("file", "img3.png")
+	fileField, err := writer.CreateFormFile("file", "shelf.png")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -81,7 +81,7 @@ func TestUploadFile(t *testing.T) {
 		t.Fatal(err)
 	}
 	req.Header.Set("Content-Type", writer.FormDataContentType())
-	data, err := util.DoRequest(req)
+	data, err := util.DoRequest(req, 60)
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -26,11 +26,16 @@ type BaseResponse struct {
 	Data    map[string]interface{} `json:"data"`
 }
 
-func DoRequest(req *http.Request) (map[string]interface{}, error) {
-	// Set the timeout
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
-	req = req.WithContext(ctx)
+// DoRequest sends the HTTP request and returns the response
+// params: req: the HTTP request
+// params: timeout: the timeout in seconds
+func DoRequest(req *http.Request, timeout int) (map[string]interface{}, error) {
+	if timeout >= 0 {
+		// Set the timeout
+		ctx, cancel := context.WithTimeout(context.Background(), time.Duration(timeout)*time.Second)
+		defer cancel()
+		req = req.WithContext(ctx)
+	}
 	// Create the HTTP client
 	client := &http.Client{}
 	// Perform the HTTP request
