@@ -10,4 +10,3 @@ The languages we currently support include Java, Python, Go.
 ### [Java](sample-java)
 ### [Python](sample-python)
 ### [GO](sample-go)
-The Go sample is built on version 1.16 of Go.
