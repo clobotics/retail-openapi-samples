@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        OpenApiClient openApiClient = new OpenApiClient("https://openapi-dev.clobotics.cn",
+        OpenApiClient openApiClient = new OpenApiClient("https://openapi.clobotics.com",
                 "<appId>", "<appSecret>");
         List<String> excludeContentUrls = new ArrayList<>();
         excludeContentUrls.add("/op/upload");

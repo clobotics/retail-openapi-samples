@@ -11,8 +11,8 @@ import (
 )
 
 const (
-	AppID     = "5d61a8bd-c308-4694-aca0-7ba34243bdd8"
-	AppSecret = "MS5DbG9ib3RpY3Mu5omp5Y2aLjhDNjk3NTM2LTYzNUItNDgxNC04MjYwLUJBRjIyNEJENDRGMQ=="
+	AppID     = "<appId>"
+	AppSecret = "<appSecret>"
 	Host      = "https://openapi.clobotics.com"
 )
 
@@ -40,9 +40,9 @@ func TestGetSceneList(t *testing.T) {
 func TestCreateIrRecognize(t *testing.T) {
 	var requestBody = []byte(`{
 			  "request_id": "c0c80b91-694c-4f6e-8232-1a039a2731a0",
-			  "image_url": "https://f-dev.clobotics.cn/4/0040ca4d85f5e5ef7354102f486ef843.jpg",
+			  "image_url": "https://f.clobotics.com/4/0040ca4d85f5e5ef7354102f486ef843.jpg",
 			  "scene_code": "104",
-			  "processed_image_url": "https://f-dev.clobotics.cn/4/0040ca4d85f5e5ef7354102f486ef877.jpg",
+			  "processed_image_url": "https://f.clobotics.com/4/0040ca4d85f5e5ef7354102f486ef877.jpg",
 			  "ext_info": "{\"key\":\"value\"}"
 			}`)
 	queryParams := map[string]string{}
