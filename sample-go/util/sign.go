@@ -6,6 +6,7 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"fmt"
+	"net/url"
 	"sort"
 	"strings"
 )
@@ -30,7 +31,8 @@ func GenSignature(appSecret string, method HttpMethod, urlPath, nonce string, ti
 	var canonicalizedResourceItems []string
 	for _, key := range keys {
 		value := queryParams[key]
-		canonicalizedResourceItems = append(canonicalizedResourceItems, fmt.Sprintf("%s=%s", key, value))
+		urlDecodeValue, _ := url.QueryUnescape(value)
+		canonicalizedResourceItems = append(canonicalizedResourceItems, fmt.Sprintf("%s=%s", key, urlDecodeValue))
 	}
 	canonicalizedResource := ""
 	if len(canonicalizedResourceItems) > 0 {
