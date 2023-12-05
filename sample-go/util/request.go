@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"sort"
 	"strconv"
 	"strings"
@@ -63,6 +64,11 @@ func DoRequest(req *http.Request, timeout int) (map[string]interface{}, error) {
 }
 
 func CreateRequest(appId, appSecret, host string, method HttpMethod, urlPath string, queryParams map[string]string, requestBody []byte) (*http.Request, error) {
+	parsedUrl, err := url.Parse(urlPath)
+	if err != nil {
+		return nil, err
+	}
+	urlPath = parsedUrl.Path
 	timestamp := time.Now().Unix()
 	nonce := GenRandomString(10)
 	// Calculate the Signature
