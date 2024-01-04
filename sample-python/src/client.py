@@ -2,7 +2,7 @@ import requests, hmac, base64, hashlib, time, uuid, json
 from urllib.parse import urlparse
 from urllib.parse import unquote
 
-openapi_host = "https://openapi-dev.clobotics.cn"
+openapi_host = "https://openapi.clobotics.com"
 openapi_app_id = "<app_id>"
 openapi_app_secret = "<app_secret>"
 exclude_content_md5_urls = {"/op/upload"}
