@@ -6,10 +6,7 @@ import okhttp3.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class OkHttpUtils {
@@ -33,14 +30,16 @@ public class OkHttpUtils {
         String jsonBody = JsonUtil.toString(body);
         RequestBody requestBody = RequestBody.create(jsonBody, MediaType.parse("application/json; charset=utf-8"));
         Request.Builder request = new Request.Builder().post(requestBody).url(url);
-        Response response = okHttpClient.newCall(request.build()).execute();
-        return Objects.requireNonNull(response.body()).string();
+        try (Response response = okHttpClient.newCall(request.build()).execute()) {
+            return Objects.requireNonNull(response.body()).string();
+        }
     }
 
     public String get(String url) throws IOException {
         Request.Builder request = new Request.Builder().get().url(url);
-        Response response = okHttpClient.newCall(request.build()).execute();
-        return Objects.requireNonNull(response.body()).string();
+        try (Response response = okHttpClient.newCall(request.build()).execute()) {
+            return Objects.requireNonNull(response.body()).string();
+        }
     }
 
     public String formData(String url, Map<String, String> datas, File file) throws IOException {
@@ -54,8 +53,8 @@ public class OkHttpUtils {
                 .addFormDataPart("file", file.getName(), RequestBody.create(file, MediaType.parse("image/png")))
                 .build();
         Request.Builder request = new Request.Builder().post(body).url(url);
-        Response response = okHttpClient.newCall(request.build()).execute();
-        return Objects.requireNonNull(response.body()).string();
+        try (Response response = okHttpClient.newCall(request.build()).execute()) {
+            return Objects.requireNonNull(response.body()).string();
+        }
     }
-
 }
